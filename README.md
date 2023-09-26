@@ -18,7 +18,7 @@
 - week #2 : 02/10/2023
 ## Tech Stack
 
-**Client:** Javascript
+**Client:** Javascript , HTML
 
 **Server:** Node.Js
 
