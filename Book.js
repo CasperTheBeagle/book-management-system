@@ -67,7 +67,6 @@ function addBook() {
         alert("ชื่อหนังสือควรเป็นตัวอักษรอย่างเดียว");
         return; // for stop before fill price
     }
-}
 const price = prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
 if (!/^\d+(\.\d{1,2})?$/.test(price)) {
     alert("ราคาควรเป็นตัวเลขอย่างเดียว หรือตัวเลขทศนิยม (ถ้ามี) สูงสุด 2 ตำแหน่ง");
