@@ -64,7 +64,7 @@ function addBook() {
     }
     const publicationYear = prompt("กรอก\"ปีที่พิมพ์\"หนังสือ \(Fill \"Publication Year\" of book\) : ");
     if (!/^\d+$/.test(publicationYear)) {
-        alert("ชื่อหนังสือควรเป็นตัวอักษรอย่างเดียว");
+        alert("ปีที่พิมพ์ควรเป็นตัวเลขเพียงอย่างเดียว");
         return; // for stop before fill price
     }
 const price = prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
