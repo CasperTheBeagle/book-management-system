@@ -20,6 +20,35 @@ function createBook(title, author, publicationYear, price) {
         price: price
     };
 }
+
+function addBook() {
+    const title = prompt("กรอก\"ชื่อ\"หนังสือ \(Fill \"Title\" of book\) : ");
+    if (!/^[a-zA-Z0-9ก-๙\s]+$/u.test(title)) {
+        alert("ชื่อหนังสือควรเป็นตัวอักษรและตัวเลขเท่านั้น");
+        return; // ออกจากฟังก์ชันเพื่อไม่ให้ทำขั้นตอนถัดไป
+    }
+    const author = prompt("กรอก\"ผู้เขียน\"หนังสือ\(Fill \"Author\" of book\)");
+    if (/^[\p{L}\s]+$/u.test(author)) {
+        alert("ชื่อผู้เขียนควรเป็นตัวอักษรไทยและอังกฤษเท่านั้น");
+        return; // for stop before fill publication year
+    }
+    const publicationYear = prompt("กรอก\"ปีที่พิมพ์\"หนังสือ \(Fill \"Publication Year\" of book\) : ");
+    if (/^\d{4}$/.test(publicationYear)) {
+        alert("ปีที่พิมพ์ควรเป็นตัวเลขเพียงอย่างเดียว");
+        return; // for stop before fill price
+    }
+    const price = prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
+    if (!/^\d+(\.\d{1,2})?$/.test(price)) {
+        alert("ราคาควรเป็นตัวเลขอย่างเดียว หรือตัวเลขทศนิยม (ถ้ามี) สูงสุด 2 ตำแหน่ง");
+        return; //for stop before Create Book
+    }
+
+    const newBook = createBook(title, author, publicationYear, price);
+    books.push(newBook);
+
+    alert("เพิ่มหนังสือเสร็จสมบูรณ์");
+}
+
 function editBook() {
     const index = prompt("กรุณาใส่เลขที่ของหนังสือที่ต้องการแก้ไข:") - 1;
 
@@ -30,13 +59,13 @@ function editBook() {
             return; // for stop before fill author
         }
         const updatedAuthor = prompt("ผู้เขียน (เดิม: " + books[index].author + "):");
-        if (!/^[\p{L}\d\s]+$/u.test(author)) {
+        if (/^[\p{L}\s]+$/u.test(author)) {
             alert("ชื่อผู้เขียนควรเป็นตัวอักษรไทยและอังกฤษเท่านั้น");
             return; // for stop before fill publication year
         }
 
         const updatedPublicationYear = prompt("ปีที่พิมพ์ (เดิม: " + books[index].publicationYear + "):");
-        if (!/^\d+$/.test(publicationYear)) {
+        if (/^\d{4}$/.test(publicationYear)) {
             alert("ปีที่พิมพ์ควรเป็นตัวเลขเพียงอย่างเดียว");
             return; // for stop before fill price
         }
@@ -69,33 +98,6 @@ function deleteBook() {
     }
 }
 
-function addBook() {
-    const title = prompt("กรอก\"ชื่อ\"หนังสือ \(Fill \"Title\" of book\) : ");
-    if (!/^[\p{L}\d\s]+$/u.test(title)) {
-        alert("ชื่อหนังสือควรเป็นตัวอักษรไทย,อักษรอังกฤษ และ ตัวเลขเท่านั้น");
-        return; // for stop before fill author
-    }
-    const author = prompt("กรอก\"ผู้เขียน\"หนังสือ\(Fill \"Author\" of book\)");
-    if (!/^[\p{L}\d\s]+$/u.test(author)) {
-        alert("ชื่อผู้เขียนควรเป็นตัวอักษรไทยและอังกฤษเท่านั้น");
-        return; // for stop before fill publication year
-    }
-    const publicationYear = prompt("กรอก\"ปีที่พิมพ์\"หนังสือ \(Fill \"Publication Year\" of book\) : ");
-    if (!/^\d+$/.test(publicationYear)) {
-        alert("ปีที่พิมพ์ควรเป็นตัวเลขเพียงอย่างเดียว");
-        return; // for stop before fill price
-    }
-    const price = prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
-    if (!/^\d+(\.\d{1,2})?$/.test(price)) {
-        alert("ราคาควรเป็นตัวเลขอย่างเดียว หรือตัวเลขทศนิยม (ถ้ามี) สูงสุด 2 ตำแหน่ง");
-        return; //for stop before Create Book
-    }
-
-    const newBook = createBook(title, author, publicationYear, price);
-    books.push(newBook);
-
-    alert("เพิ่มหนังสือเสร็จสมบูรณ์");
-}
 function viewBooks() {
     if (books.length === 0) {
         alert("ยังไม่มีหนังสือในรายการ");
