@@ -12,8 +12,6 @@ books[
     }
 ]
 */
-
-
 function createBook(title, author, publicationYear, price) {
     return {
         title: title,
@@ -53,14 +51,31 @@ function deleteBook() {
     }
 }
 
-function addBook(){
- const title=prompt("กรอก\"ชื่อ\"หนังสือ \(Fill \"Title\" of book\) : ");
- const author=prompt("กรอก\"ผู้เขียน\"หนังสือ\(Fill \"Author\" of book\)");
- const publicationYear=prompt("กรอก\"ปีที่พิมพ์\"หนังสือ \(Fill \"Publication Year\" of book\) : ");
- const price=prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
- const newBook = createBook(title,author,publicationYear,price);
- books.push(newBook);
- alert("เพิ่มหนังสือเสร็จสมบูรณ์");
+function addBook() {
+    const title = prompt("กรอก\"ชื่อ\"หนังสือ \(Fill \"Title\" of book\) : ");
+    if (!/^[a-zA-Z]+$/.test(title)) {
+        alert("ชื่อหนังสือควรเป็นตัวอักษรอย่างเดียว");
+        return; // for stop before fill author
+    }
+    const author = prompt("กรอก\"ผู้เขียน\"หนังสือ\(Fill \"Author\" of book\)");
+    if (!/^[a-zA-Z]+$/.test(author)) {
+        alert("ชื่อผู้เขียนควรเป็นตัวอักษรอย่างเดียว");
+        return; // for stop before fill publication year
+    }
+    const publicationYear = prompt("กรอก\"ปีที่พิมพ์\"หนังสือ \(Fill \"Publication Year\" of book\) : ");
+    if (!/^[a-zA-Z]+$/.test(title)) {
+        alert("ชื่อหนังสือควรเป็นตัวอักษรอย่างเดียว");
+        return; // for stop before fill price
+    }
+}
+const price = prompt("กรอก\"ราคา\"หนังสือ \(Fill \"Title\" of book\) : ");
+if (!/^\d+(\.\d{1,2})?$/.test(price)) {
+    alert("ราคาควรเป็นตัวเลขอย่างเดียว หรือตัวเลขทศนิยม (ถ้ามี) สูงสุด 2 ตำแหน่ง");
+    return; //for stop before Create Book
+}
+const newBook = createBook(title, author, publicationYear, price);
+books.push(newBook);
+alert("เพิ่มหนังสือเสร็จสมบูรณ์");
 }
 function viewBooks() {
     if (books.length === 0) {
@@ -74,13 +89,13 @@ function viewBooks() {
     }
 }
 
-    
+
 
 
 while (true) {
     myAppCLI()
 }
-function myAppCLI(){
+function myAppCLI() {
     const choice = prompt(
         "เลือกรายการที่ต้องการ (1: เพิ่มหนังสือ, 2: แสดงรายการหนังสือ, 3: แก้ไขหนังสือ, 4: ลบหนังสือ, 0: ออกจากระบบ):"
     );
